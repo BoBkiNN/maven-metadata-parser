@@ -1,0 +1,46 @@
+name: Build Action with ncc
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js 20 LTS
+      - name: Set up Node.js 20 LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Step 4: Install @vercel/ncc globally
+      - name: Install @vercel/ncc globally
+        run: |
+          npm install -g @vercel/ncc
+
+      # Step 5: Build the project using ncc
+      - name: Run ncc build
+        run: |
+          ncc build index.js
+
+      # Step 6: Commit the build output and push changes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist/index.js
+          git commit -m "Build action"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub token to authenticate the commit
+          
