@@ -29,4 +29,5 @@ Last updated time. Has format like `20250113170016`
 
 ## TODO
 * Add error handling to warn or raise error with user choise
+* Add getting last update timestamp as unix time
 
