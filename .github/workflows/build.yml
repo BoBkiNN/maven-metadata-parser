@@ -26,8 +26,8 @@ jobs:
 
       # Step 4: Install @vercel/ncc globally
       - name: Install @vercel/ncc globally
-        run: |
-          npm install -g @vercel/ncc
+        run: npm install -g @vercel/ncc
+      - run: npm test
 
       # Step 5: Build the project using ncc
       - name: Run ncc build
