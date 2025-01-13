@@ -15,7 +15,7 @@ outputs:
   latest_release:
     description: Latest release version of artifact
   last_updated_time:
-    desciption: Last updated time
+    description: Last updated time
   
 
 runs:
