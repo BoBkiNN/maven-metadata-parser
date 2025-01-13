@@ -34260,7 +34260,7 @@ async function run() {
         const artifactId = core.getInput('artifact_id');
 
         const { latest, release, lastUpdated } = await mainAction(repoUrl, artifactId);
-
+        console.log(latest+":"+typeof(latest))
         // Set the outputs for the GitHub Action
         core.setOutput('latest_version', latest);
         core.setOutput('latest_release', release ?? "");
