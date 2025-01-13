@@ -1,0 +1,23 @@
+name: Maven Metadata parser
+description: Downloads maven-metadata.xml and provides data from it
+author: BoBkiNN
+inputs:
+  repo_url:
+    description: 'Repository URL'
+    required: true
+  artifact_id:
+    description: Dot-separated maven artifact id like com.example.app
+    required: true
+
+outputs:
+  latest_version:
+    description: Latest version of artifact
+  latest_release:
+    description: Latest release version of artifact
+  last_updated_time:
+    desciption: Last updated time
+  
+
+runs:
+  using: 'node20'
+  main: 'index.js'
