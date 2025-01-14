@@ -60,9 +60,9 @@ async function parseMetadataXml(xmlContent) {
     const versioning = parsedData.metadata.versioning[0];
 
     return {
-        latest: versioning.latest[0],
+        latest: versioning.latest?.[0] ?? null,
         release: versioning.release?.[0] ?? null,
-        lastUpdated: versioning.lastUpdated[0],
+        lastUpdated: versioning.lastUpdated?.[0] ?? null,
     };
 }
 
