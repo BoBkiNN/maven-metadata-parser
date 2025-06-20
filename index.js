@@ -8,7 +8,7 @@ async function run() {
 
         const { latest, release, lastUpdated } = await mainAction(repoUrl, artifactId);
         // Set the outputs for the GitHub Action
-        core.setOutput('latest_version', latest);
+        core.setOutput('latest_version', latest ?? "");
         core.setOutput('latest_release', release ?? "");
         core.setOutput('last_updated_time', lastUpdated);
     } catch (error) {
