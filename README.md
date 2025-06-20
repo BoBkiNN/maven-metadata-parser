@@ -30,7 +30,7 @@ Last updated time. Has format like `20250113170016`
 
 ```yml
 - name: Download current version
-  uses: BoBkiNN/maven-metadata-parser@v1.0.2 # dont forget to replace version
+  uses: BoBkiNN/maven-metadata-parser@v1.0.4 # dont forget to replace version with actual
   id: download_current_version
   with:
     repo_url: https://repo.maven.apache.org/maven2
