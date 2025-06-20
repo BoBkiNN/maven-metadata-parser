@@ -30,12 +30,15 @@ function constructMetadataUrl(repoUrl, artifactPath) {
 /**
  * Downloads a file from the given URL.
  * @param {string} url - File URL.
- * @returns {Promise<string>} - File content.
+ * @returns {Promise<string?>} - File content.
  */
 function downloadFile(url) {
     return new Promise((resolve, reject) => {
         const client = url.startsWith('https') ? https : http;
         client.get(url, (response) => {
+            if (response.statusCode == 404) {
+                resolve(null); // Return null if the file is not found
+            }
             if (response.statusCode !== 200) {
                 reject(new Error(`Failed to download file: ${response.statusCode}`));
                 return;
@@ -77,6 +80,13 @@ async function mainAction(repoUrl, artifactId) {
     const artifactPath = convertArtifactIdToPath(artifactId);
     const metadataUrl = constructMetadataUrl(repoUrl, artifactPath);
     const fileContent = await downloadFile(metadataUrl);
+    if (fileContent === null) {
+        return {
+            latest: null,
+            release: null,
+            lastUpdated: null,
+        };
+    }
     return parseMetadataXml(fileContent);
 }
 
@@ -34261,7 +34271,7 @@ async function run() {
 
         const { latest, release, lastUpdated } = await mainAction(repoUrl, artifactId);
         // Set the outputs for the GitHub Action
-        core.setOutput('latest_version', latest);
+        core.setOutput('latest_version', latest ?? "");
         core.setOutput('latest_release', release ?? "");
         core.setOutput('last_updated_time', lastUpdated);
     } catch (error) {
