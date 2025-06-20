@@ -16,7 +16,7 @@ This action downloads `maven-metadata.xml` from provided repository and parses i
 
 ### `latest_version`
 
-Latest version of artifact
+Latest version of artifact. Will be empty if no artifact data found (404)
 
 ### `latest_release`
 
